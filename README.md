@@ -1,4 +1,4 @@
-System.ServiceModel.Web
-=======================
+DotNetSyndication
+=================
 
-Web ServiceModel
+Syndication
