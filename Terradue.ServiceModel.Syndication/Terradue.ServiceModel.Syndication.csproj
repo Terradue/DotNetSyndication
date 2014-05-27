@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{729A82DF-D3CE-4A1A-BA83-0508F0362DB5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Terradue.ServiceModel.Syndication</RootNamespace>
+    <AssemblyName>Syndication</AssemblyName>
+    <UseMSBuildEngine>False</UseMSBuildEngine>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Atom10FeedFormatter.cs" />
+    <Compile Include="Atom10FeedFormatter_1.cs" />
+    <Compile Include="Atom10ItemFormatter.cs" />
+    <Compile Include="Atom10ItemFormatter_1.cs" />
+    <Compile Include="AtomPub10CategoriesDocumentFormatter.cs" />
+    <Compile Include="AtomPub10ServiceDocumentFormatter.cs" />
+    <Compile Include="AtomPub10ServiceDocumentFormatter_1.cs" />
+    <Compile Include="CategoriesDocument.cs" />
+    <Compile Include="CategoriesDocumentFormatter.cs" />
+    <Compile Include="InlineCategoriesDocument.cs" />
+    <Compile Include="ISyndicationElement.cs" />
+    <Compile Include="ReferencedCategoriesDocument.cs" />
+    <Compile Include="ResourceCollectionInfo.cs" />
+    <Compile Include="Rss20FeedFormatter.cs" />
+    <Compile Include="Rss20FeedFormatter_1.cs" />
+    <Compile Include="Rss20ItemFormatter.cs" />
+    <Compile Include="Rss20ItemFormatter_1.cs" />
+    <Compile Include="ServiceDocument.cs" />
+    <Compile Include="ServiceDocumentFormatter.cs" />
+    <Compile Include="SyndicationCategory.cs" />
+    <Compile Include="SyndicationContent.cs" />
+    <Compile Include="SyndicationElementExtension.cs" />
+    <Compile Include="SyndicationElementExtensionCollection.cs" />
+    <Compile Include="SyndicationExtensions.cs" />
+    <Compile Include="SyndicationFeed.cs" />
+    <Compile Include="SyndicationFeedFormatter.cs" />
+    <Compile Include="SyndicationItem.cs" />
+    <Compile Include="SyndicationItemFormatter.cs" />
+    <Compile Include="SyndicationLink.cs" />
+    <Compile Include="SyndicationPerson.cs" />
+    <Compile Include="SyndicationVersions.cs" />
+    <Compile Include="TextSyndicationContent.cs" />
+    <Compile Include="TextSyndicationContentKind.cs" />
+    <Compile Include="UrlSyndicationContent.cs" />
+    <Compile Include="Workspace.cs" />
+    <Compile Include="XmlSyndicationContent.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="ChangeLog" />
+  </ItemGroup>
+</Project>
