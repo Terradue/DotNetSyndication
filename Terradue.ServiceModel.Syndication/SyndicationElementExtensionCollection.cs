@@ -38,6 +38,8 @@ namespace Terradue.ServiceModel.Syndication
 {
 	public sealed class SyndicationElementExtensionCollection : Collection<SyndicationElementExtension>
 	{
+        MemoryStream buffer;
+
         public SyndicationElementExtensionCollection ()
 		{
 		}
@@ -91,10 +93,12 @@ namespace Terradue.ServiceModel.Syndication
 			base.ClearItems ();
 		}
 
-        //[MonoTODO]
 		public XmlReader GetReaderAtElementExtensions ()
 		{
-			throw new NotImplementedException ();
+            MemoryStream extensionsBuffer = GetOrCreateBufferOverExtensions();
+            XmlReader reader = XmlReader.Create(extensionsBuffer);
+            reader.ReadStartElement();
+            return reader;
 		}
 
 		protected override void InsertItem (int index, SyndicationElementExtension item)
@@ -149,5 +153,28 @@ namespace Terradue.ServiceModel.Syndication
 				throw new ArgumentNullException ("item");
 			base.SetItem (index, item);
 		}
+
+        MemoryStream GetOrCreateBufferOverExtensions()
+        {
+
+            if (this.buffer != null)
+            {
+                this.buffer.Seek(0, SeekOrigin.Begin);
+                return this.buffer;
+            }
+            MemoryStream newBuffer = new MemoryStream();
+            using (XmlWriter writer = XmlWriter.Create(newBuffer))
+            {
+                writer.WriteStartElement(Rss20Constants.ExtensionWrapperTag);
+                for (int i = 0; i < this.Count; ++i)
+                {
+                    this[i].WriteTo(writer);
+                }
+                writer.WriteEndElement();
+            }
+            this.buffer = newBuffer;
+            this.buffer.Seek(0, SeekOrigin.Begin);
+            return this.buffer;
+        }
 	}
 }

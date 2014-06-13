@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="UrlSyndicationContent.cs" />
     <Compile Include="Workspace.cs" />
     <Compile Include="XmlSyndicationContent.cs" />
+    <Compile Include="Rss20Constants.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
