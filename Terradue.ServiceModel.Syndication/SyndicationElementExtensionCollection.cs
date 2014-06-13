@@ -38,11 +38,11 @@ namespace Terradue.ServiceModel.Syndication
 {
 	public sealed class SyndicationElementExtensionCollection : Collection<SyndicationElementExtension>
 	{
-		internal SyndicationElementExtensionCollection ()
+        public SyndicationElementExtensionCollection ()
 		{
 		}
 
-		internal SyndicationElementExtensionCollection (IEnumerable<SyndicationElementExtension> source)
+        public SyndicationElementExtensionCollection (IEnumerable<SyndicationElementExtension> source)
 		{
 			if (source == null)
 				throw new ArgumentNullException ("source");
