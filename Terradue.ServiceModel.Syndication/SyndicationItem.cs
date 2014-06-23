@@ -129,9 +129,12 @@ namespace Terradue.ServiceModel.Syndication
 			get { return extensions.Attributes; }
 		}
 
-		public SyndicationElementExtensionCollection ElementExtensions {
-			get { return extensions.Elements; }
-		}
+        public SyndicationElementExtensionCollection ElementExtensions {
+            get { return extensions.Elements; }
+            set {
+                extensions.Elements = value;
+            }
+        }
 
 		public Collection<SyndicationPerson> Authors {
 			get {
@@ -157,13 +160,16 @@ namespace Terradue.ServiceModel.Syndication
 			}
 		}
 
-		public Collection<SyndicationLink> Links {
-			get {
-				if (links == null)
-					links = new Collection<SyndicationLink> ();
-				return links;
-			}
-		}
+        public Collection<SyndicationLink> Links {
+            get {
+                if (links == null)
+                    links = new Collection<SyndicationLink>();
+                return links;
+            }
+            set {
+                links = value;
+            }
+        }
 
 		public Uri BaseUri {
 			get { return base_uri; }

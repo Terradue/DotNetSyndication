@@ -82,7 +82,7 @@ namespace Terradue.ServiceModel.Syndication
 			Add (new SyndicationElementExtension (xmlReader));
 		}
 
-		new void Add (SyndicationElementExtension item)
+        public new void Add (SyndicationElementExtension item)
 		{
 			base.Add (item);
 		}
@@ -100,6 +100,13 @@ namespace Terradue.ServiceModel.Syndication
             reader.ReadStartElement();
             return reader;
 		}
+
+        public XmlReader GetReaderAtExtensionWrapper ()
+        {
+            MemoryStream extensionsBuffer = GetOrCreateBufferOverExtensions();
+            XmlReader reader = XmlReader.Create(extensionsBuffer);
+            return reader;
+        }
 
 		protected override void InsertItem (int index, SyndicationElementExtension item)
 		{
@@ -156,12 +163,6 @@ namespace Terradue.ServiceModel.Syndication
 
         MemoryStream GetOrCreateBufferOverExtensions()
         {
-
-            if (this.buffer != null)
-            {
-                this.buffer.Seek(0, SeekOrigin.Begin);
-                return this.buffer;
-            }
             MemoryStream newBuffer = new MemoryStream();
             using (XmlWriter writer = XmlWriter.Create(newBuffer))
             {
