@@ -84,7 +84,7 @@ namespace Terradue.ServiceModel.Syndication
 			LastUpdatedTime = lastUpdatedTime;
 		}
 
-		protected SyndicationItem (SyndicationItem source)
+        public SyndicationItem (SyndicationItem source)
 		{
 			extensions = source.extensions.Clone ();
 			categories = Copy<SyndicationCategory> (source.categories);
