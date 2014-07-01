@@ -91,7 +91,7 @@ namespace Terradue.ServiceModel.Syndication {
                 Items = items;
         }
 
-        protected SyndicationFeed(SyndicationFeed source, bool cloneItems) {
+        public SyndicationFeed(SyndicationFeed source, bool cloneItems) {
             extensions = source.extensions.Clone();
             categories = source.categories == null ? null : new Collection<SyndicationCategory>(source.categories);
             authors = source.authors == null ? null : new Collection<SyndicationPerson>(source.authors);
