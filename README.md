@@ -39,5 +39,5 @@ Originally licensed under the under the terms of the [MIT X11 license](https://g
 
 Copyright (c) 2014 Terradue
 
-Licensed under the [GPL v3 License](https://github.com/Terradue/DotNetSyndication/blob/master/LICENSE.txt)
+Licensed under the [GPL v3 License](https://github.com/Terradue/DotNetSyndication/blob/master/LICENSE)
 
