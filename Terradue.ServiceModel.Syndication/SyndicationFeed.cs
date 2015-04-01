@@ -33,6 +33,22 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
+/*!
+\defgroup Syndication Syndication Feed
+@{
+
+Syndication Feed is a conceptual model in which website material is made available through a list of entries.
+In this context, the syndication feed is mainly used to represent a set of results from a query in the \ref Atom Format.
+
+\xrefitem norm "Normative References" "Normative References" [The Atom Syndication Format RFC4287](https://tools.ietf.org/html/rfc4287)
+
+\xrefitem cptype_sm "ServiceModel" "Service Models"
+
+\xrefitem cpgroup_model "Model" "Models"
+
+@}
+*/
+
 namespace Terradue.ServiceModel.Syndication
 {
 	public class SyndicationFeed : ISyndicationElement
