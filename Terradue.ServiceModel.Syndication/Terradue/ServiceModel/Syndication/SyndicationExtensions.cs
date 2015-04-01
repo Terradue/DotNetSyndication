@@ -49,13 +49,16 @@ namespace Terradue.ServiceModel.Syndication
 			}
 		}
 
-		public SyndicationElementExtensionCollection Elements {
-			get {
-				if (elements == null)
-					elements = new SyndicationElementExtensionCollection ();
-				return elements;
-			}
-		}
+        public SyndicationElementExtensionCollection Elements {
+            get {
+                if (elements == null)
+                    elements = new SyndicationElementExtensionCollection();
+                return elements;
+            }
+            set {
+                elements = value;
+            }
+        }
 
 		public SyndicationExtensions Clone ()
 		{

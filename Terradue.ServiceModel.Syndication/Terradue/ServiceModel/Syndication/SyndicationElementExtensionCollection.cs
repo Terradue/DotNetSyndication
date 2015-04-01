@@ -38,11 +38,13 @@ namespace Terradue.ServiceModel.Syndication
 {
 	public sealed class SyndicationElementExtensionCollection : Collection<SyndicationElementExtension>
 	{
-		internal SyndicationElementExtensionCollection ()
+        MemoryStream buffer;
+
+        public SyndicationElementExtensionCollection ()
 		{
 		}
 
-		internal SyndicationElementExtensionCollection (IEnumerable<SyndicationElementExtension> source)
+        public SyndicationElementExtensionCollection (IEnumerable<SyndicationElementExtension> source)
 		{
 			if (source == null)
 				throw new ArgumentNullException ("source");
@@ -80,7 +82,7 @@ namespace Terradue.ServiceModel.Syndication
 			Add (new SyndicationElementExtension (xmlReader));
 		}
 
-		new void Add (SyndicationElementExtension item)
+        public new void Add (SyndicationElementExtension item)
 		{
 			base.Add (item);
 		}
@@ -91,11 +93,20 @@ namespace Terradue.ServiceModel.Syndication
 			base.ClearItems ();
 		}
 
-        //[MonoTODO]
 		public XmlReader GetReaderAtElementExtensions ()
 		{
-			throw new NotImplementedException ();
+            MemoryStream extensionsBuffer = GetOrCreateBufferOverExtensions();
+            XmlReader reader = XmlReader.Create(extensionsBuffer);
+            reader.ReadStartElement();
+            return reader;
 		}
+
+        public XmlReader GetReaderAtExtensionWrapper ()
+        {
+            MemoryStream extensionsBuffer = GetOrCreateBufferOverExtensions();
+            XmlReader reader = XmlReader.Create(extensionsBuffer);
+            return reader;
+        }
 
 		protected override void InsertItem (int index, SyndicationElementExtension item)
 		{
@@ -149,5 +160,22 @@ namespace Terradue.ServiceModel.Syndication
 				throw new ArgumentNullException ("item");
 			base.SetItem (index, item);
 		}
+
+        MemoryStream GetOrCreateBufferOverExtensions()
+        {
+            MemoryStream newBuffer = new MemoryStream();
+            using (XmlWriter writer = XmlWriter.Create(newBuffer))
+            {
+                writer.WriteStartElement(Rss20Constants.ExtensionWrapperTag);
+                for (int i = 0; i < this.Count; ++i)
+                {
+                    this[i].WriteTo(writer);
+                }
+                writer.WriteEndElement();
+            }
+            this.buffer = newBuffer;
+            this.buffer.Seek(0, SeekOrigin.Begin);
+            return this.buffer;
+        }
 	}
 }

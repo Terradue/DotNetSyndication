@@ -92,7 +92,7 @@ namespace Terradue.ServiceModel.Syndication
 			Length = length;
 		}
 
-		protected SyndicationLink (SyndicationLink source)
+        public SyndicationLink (SyndicationLink source)
 		{
 			if (source == null)
 				throw new ArgumentNullException ("source");
