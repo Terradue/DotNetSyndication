@@ -25,6 +25,9 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
+
+
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,6 +35,31 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
+
+/*!
+
+\addtogroup Model Model
+@{
+
+@}
+
+*/
+
+/*!
+\defgroup Syndication Syndication Feed
+@{
+
+    Syndication Feed is a conceptual model in which website material is made available through a list of entries.
+    In this context, the syndication feed is mainly used to represent a set of results from a query in the \ref Atom Format.
+
+    \xrefitem norm "Normative References" "Normative References" [The Atom Syndication Format RFC4287](https://tools.ietf.org/html/rfc4287)
+
+   \xrefitem cptype_sm "ServiceModel" "Service Models"
+
+   \ingroup Model
+
+@}
+*/
 
 namespace Terradue.ServiceModel.Syndication {
     public class SyndicationFeed : ISyndicationElement {
