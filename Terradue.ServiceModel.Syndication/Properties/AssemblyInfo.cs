@@ -6,13 +6,13 @@ using System.Runtime.CompilerServices;
 
 \namespace Terradue.ServiceModel.Syndication
 @{
-    DotNetSyndication Software Package
+    DotNetSyndication Software Package implements the ATOM and RSS object representation, serialization and deserialization
 
     \xrefitem sw_version "Versions" "Software Package Version" 1.0.0
 
     \xrefitem sw_link "Link" "Software Package Link" [DotNetSyndication](https://github.com/Terradue/DotNetSyndication)
 
-    \xrefitem sw_license "License" "Software License" [GPLv3](https://github.com/Terradue/DotNetSyndication/blob/master/LICENSE)
+    \xrefitem sw_license "License" "Software License" [AGPL](https://github.com/Terradue/DotNetSyndication/blob/master/LICENSE)
 
     \ingroup Model
 @}
