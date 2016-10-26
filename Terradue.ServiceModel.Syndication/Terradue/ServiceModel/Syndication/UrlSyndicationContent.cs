@@ -65,8 +65,6 @@ namespace Terradue.ServiceModel.Syndication
 		{
 			if (writer == null)
 				throw new ArgumentNullException ("writer");
-			if (media_type != null)
-				writer.WriteAttributeString ("type", media_type);
 			writer.WriteAttributeString ("src", url.ToString ());
 		}
 
