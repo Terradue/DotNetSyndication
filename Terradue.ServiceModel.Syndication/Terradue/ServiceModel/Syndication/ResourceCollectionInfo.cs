@@ -108,9 +108,9 @@ namespace Terradue.ServiceModel.Syndication
 		protected internal virtual bool TryParseAttribute (string name, string ns, string value, string version)
 		{
 			if (name == "base" && ns == Namespaces.Xml)
-				BaseUri = new Uri (value, UriKind.RelativeOrAbsolute);
+				BaseUri = new Uri (value, value?.StartsWith("/") == true ? UriKind.Relative : UriKind.RelativeOrAbsolute);
 			else if (name == "href" && ns == String.Empty)
-				Link = new Uri (value, UriKind.RelativeOrAbsolute);
+				Link = new Uri (value, value?.StartsWith("/") == true ? UriKind.Relative : UriKind.RelativeOrAbsolute);
 			else
 				return false;
 			return true;

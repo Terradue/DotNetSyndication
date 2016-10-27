@@ -498,7 +498,7 @@ namespace Terradue.ServiceModel.Syndication
 
 		Uri CreateUri (string uri)
 		{
-			return new Uri (uri, UriKind.RelativeOrAbsolute);
+			return new Uri (uri, uri?.StartsWith("/") == true ? UriKind.Relative : UriKind.RelativeOrAbsolute);
 		}
 
 		// write

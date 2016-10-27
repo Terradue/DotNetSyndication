@@ -105,9 +105,9 @@ namespace Terradue.ServiceModel.Syndication
 			if (name == "lang" && ns == Namespaces.Xml)
 				Language = value;
 			else if (name == "base" && ns == Namespaces.Xml)
-				BaseUri = new Uri (value, UriKind.RelativeOrAbsolute);
+				BaseUri = new Uri (value, value?.StartsWith("/") == true ? UriKind.Relative : UriKind.RelativeOrAbsolute);
 			else if (name == "href" && ns == String.Empty && this is ReferencedCategoriesDocument)
-				((ReferencedCategoriesDocument) this).Link = new Uri (value, UriKind.RelativeOrAbsolute);
+				((ReferencedCategoriesDocument) this).Link = new Uri (value, value?.StartsWith("/") == true ? UriKind.Relative : UriKind.RelativeOrAbsolute);
 			else if (name == "fixed" && ns == String.Empty && inline != null && value == "true")
 				inline.IsFixed = true;
 			else if (name == "scheme" && ns == String.Empty && inline != null)

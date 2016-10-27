@@ -110,7 +110,7 @@ namespace Terradue.ServiceModel.Syndication
 			case "http://www.w3.org/XML/1998/namespace":
 				switch (name) {
 				case "base":
-					BaseUri = new Uri (value, UriKind.RelativeOrAbsolute);
+					BaseUri = new Uri (value, value?.StartsWith("/") == true ? UriKind.Relative : UriKind.RelativeOrAbsolute);
 					return true;
 				case "lang":
 					Language = value;
