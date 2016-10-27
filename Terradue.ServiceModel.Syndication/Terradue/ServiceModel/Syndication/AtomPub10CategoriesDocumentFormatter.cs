@@ -95,7 +95,7 @@ namespace Terradue.ServiceModel.Syndication
 				var href = reader.GetAttribute ("href");
 				if (href != null) {
 					var doc = CreateReferencedCategoriesDocument ();
-					doc.Link = new Uri (href, UriKind.RelativeOrAbsolute);
+					doc.Link = new Uri (href, href?.StartsWith("/") == true ? UriKind.Relative : UriKind.RelativeOrAbsolute);
 					SetDocument (doc);
 				} else {
 					var doc = CreateInlineCategoriesDocument ();
