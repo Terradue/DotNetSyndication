@@ -6,3 +6,4 @@
 build
 
 /Terradue.ServiceModel.Syndication/obj/
+*.nupkg

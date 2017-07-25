@@ -16,5 +16,6 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Terradue.ServiceModel.Syndication\Terradue.ServiceModel.Syndication.csproj
+		version = 
 	EndGlobalSection
 EndGlobal
