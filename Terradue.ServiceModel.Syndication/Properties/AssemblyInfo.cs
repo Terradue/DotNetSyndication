@@ -23,7 +23,7 @@ using NuGet4Mono.Extensions;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 [assembly: AssemblyTitle("Terradue.ServiceModel.Syndication")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("DotNetSyndication Software Package implements the ATOM and RSS object representation, serialization and deserialization")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Terradue")]
 [assembly: AssemblyTrademark("")]
