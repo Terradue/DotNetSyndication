@@ -411,10 +411,10 @@ namespace Terradue.ServiceModel.Syndication
 				writer.WriteStartElement ("feed", AtomNamespace);
 
 			if (Feed.BaseUri != null)
-				writer.WriteAttributeString ("xml:base", Feed.BaseUri.ToString ());
+				writer.WriteAttributeString ("base", "http://www.w3.org/XML/1998/namespace", Feed.BaseUri.ToString ());
 
 			if (Feed.Language != null)
-				writer.WriteAttributeString ("xml:lang", Feed.Language);
+				writer.WriteAttributeString ("lang", "http://www.w3.org/XML/1998/namespace", Feed.Language);
 
 			// atom:feed elements MUST contain exactly one atom:title element.
 			(Feed.Title ?? new TextSyndicationContent (String.Empty)).WriteTo (writer, "title", AtomNamespace);
