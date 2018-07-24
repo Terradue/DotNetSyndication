@@ -9,3 +9,4 @@ build
 *.nupkg
 /Terradue.ServiceModel.Syndication.Tests/bin
 /.vs
+/packages

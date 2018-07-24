@@ -42,6 +42,9 @@
     <Reference Include="System.Xml">
       <HintPath>..\..\..\..\..\..\..\..\Library\Frameworks\Mono.framework\Versions\5.10.1\lib\mono\4.5.2-api\System.Xml.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Test.cs" />
