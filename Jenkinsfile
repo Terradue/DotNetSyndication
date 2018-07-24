@@ -30,7 +30,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'mkdir -p *.Tests/out'
+        sh 'mkdir -p Terradue.ServiceModel.Syndication.Tests/out'
         sh 'nunit-console4 *.Tests/bin/*.Tests.dll -xml build/TestResult.xml'
       }
     }
