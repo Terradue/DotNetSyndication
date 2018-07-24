@@ -10,3 +10,4 @@ build
 /Terradue.ServiceModel.Syndication.Tests/bin
 /.vs
 /packages
+/Terradue.ServiceModel.Syndication.Tests/out/search.atom
