@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Init') {
       steps {
-        sh 'rm -rf packges */bin build'
+        sh 'rm -rf packages */bin build'
         sh 'mkdir -p build'
         sh 'nuget restore'
         sh 'ls -la'
@@ -17,22 +17,20 @@ pipeline {
     stage('Build') {
       steps {
         echo "The library will be build in ${params.DOTNET_CONFIG}"
-        sh "msbuild /p:Configuration=${params.DOTNET_CONFIG}"
+        sh "xbuild /p:Configuration=${params.DOTNET_CONFIG}"
       }
     }
     stage('Package') {
       steps {
-        parallel(
-          "Package": {
-            sh 'cat *.nuspec'
-            sh 'nuget pack -OutputDirectory build'
-            sh "echo ${params.NUGET_PUBLISH}"
-          },
-          "Test": {
-            echo "no test so far"
-            //sh 'nunit-console4 *.Test/bin/*.Test.dll -xml build/TestResult.xml'
-          }
-        )
+          sh "nuget4mono -g origin/${env.BRANCH_NAME} -p Terradue.ServiceModel.Syndication/packages.config Terradue.ServiceModel.Syndication/bin/Terradue.ServiceModel.Syndication.dll"
+          sh 'cat *.nuspec'
+          sh 'nuget pack -OutputDirectory build'
+          sh "echo ${params.NUGET_PUBLISH}"
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'nunit-console4 *.Tests/bin/*.Tests.dll -xml build/TestResult.xml'
       }
     }
     stage('Publish') {
@@ -43,7 +41,7 @@ pipeline {
       }
       steps {
         echo 'Deploying'
-        sh "nuget push build/*.nupkg -ApiKey ${params.NUGET_API_KEY} -Source https://nuget.org/api/v2/package"
+        sh "nuget push build/*.nupkg -ApiKey ${params.NUGET_API_KEY} -Source https://www.nuget.org/api/v2/package"
       }       
     }
   }
