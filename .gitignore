@@ -6,3 +6,6 @@
 build
 
 /Terradue.ServiceModel.Syndication/obj/
+*.nupkg
+/Terradue.ServiceModel.Syndication.Tests/bin
+/.vs

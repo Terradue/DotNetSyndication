@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terradue.ServiceModel.Syndication", "Terradue.ServiceModel.Syndication\Terradue.ServiceModel.Syndication.csproj", "{729A82DF-D3CE-4A1A-BA83-0508F0362DB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terradue.ServiceModel.Syndication.Tests", "Terradue.ServiceModel.Syndication.Tests\Terradue.ServiceModel.Syndication.Tests.csproj", "{1EC58DA0-C05C-4636-952E-08F99321CDE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,8 +15,13 @@ Global
 		{729A82DF-D3CE-4A1A-BA83-0508F0362DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{729A82DF-D3CE-4A1A-BA83-0508F0362DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{729A82DF-D3CE-4A1A-BA83-0508F0362DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EC58DA0-C05C-4636-952E-08F99321CDE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EC58DA0-C05C-4636-952E-08F99321CDE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EC58DA0-C05C-4636-952E-08F99321CDE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EC58DA0-C05C-4636-952E-08F99321CDE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Terradue.ServiceModel.Syndication\Terradue.ServiceModel.Syndication.csproj
+		version = 
 	EndGlobalSection
 EndGlobal
