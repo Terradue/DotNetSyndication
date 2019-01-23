@@ -416,8 +416,16 @@ namespace Terradue.ServiceModel.Syndication
 			if (Feed.Language != null)
 				writer.WriteAttributeString ("lang", "http://www.w3.org/XML/1998/namespace", Feed.Language);
 
-			// atom:feed elements MUST contain exactly one atom:title element.
-			(Feed.Title ?? new TextSyndicationContent (String.Empty)).WriteTo (writer, "title", AtomNamespace);
+            if (Feed.AttributeExtensions != null)
+            {
+                foreach (var attr in Feed.AttributeExtensions)
+                {
+                    writer.WriteAttributeString(attr.Key.Name, attr.Key.Namespace, attr.Value);
+                }
+            }
+
+            // atom:feed elements MUST contain exactly one atom:title element.
+            (Feed.Title ?? new TextSyndicationContent (String.Empty)).WriteTo (writer, "title", AtomNamespace);
 
 			// atom:feed elements MUST contain exactly one atom:id element.
 			writer.WriteElementString ("id", AtomNamespace, Feed.Id ?? new UniqueId ().ToString ());
