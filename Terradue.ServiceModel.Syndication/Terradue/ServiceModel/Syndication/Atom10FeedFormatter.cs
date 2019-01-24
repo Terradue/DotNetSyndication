@@ -407,94 +407,101 @@ namespace Terradue.ServiceModel.Syndication
 			if (Feed == null)
 				throw new InvalidOperationException ("Syndication item must be set before writing");
 
-			if (writeRoot)
-				writer.WriteStartElement ("feed", AtomNamespace);
-
-			if (Feed.BaseUri != null)
-				writer.WriteAttributeString ("base", "http://www.w3.org/XML/1998/namespace", Feed.BaseUri.ToString ());
-
-			if (Feed.Language != null)
-				writer.WriteAttributeString ("lang", "http://www.w3.org/XML/1998/namespace", Feed.Language);
-
-            if (Feed.AttributeExtensions != null)
+            if (writeRoot)
             {
-                foreach (var attr in Feed.AttributeExtensions)
+                writer.WriteStartElement("feed", AtomNamespace);
+
+                if (Feed.AttributeExtensions != null)
                 {
-                    writer.WriteAttributeString(attr.Key.Name, attr.Key.Namespace, attr.Value);
+                    foreach (var attr in Feed.AttributeExtensions)
+                    {
+                        writer.WriteAttributeString(attr.Key.Name, attr.Key.Namespace, attr.Value);
+                    }
+                }
+                if (Feed.BaseUri != null)
+                    writer.WriteAttributeString("base", "http://www.w3.org/XML/1998/namespace", Feed.BaseUri.ToString());
+
+                if (Feed.Language != null)
+                    writer.WriteAttributeString("lang", "http://www.w3.org/XML/1998/namespace", Feed.Language);
+            }
+
+            foreach (SyndicationPerson author in Feed.Authors)
+                if (author != null)
+                {
+                    writer.WriteStartElement("author", AtomNamespace);
+                    WriteAttributeExtensions(writer, author, Version);
+                    writer.WriteElementString("name", AtomNamespace, author.Name);
+                    writer.WriteElementString("uri", AtomNamespace, author.Uri);
+                    writer.WriteElementString("email", AtomNamespace, author.Email);
+                    WriteElementExtensions(writer, author, Version);
+                    writer.WriteEndElement();
+                }
+
+            foreach (SyndicationCategory category in Feed.Categories)
+                if (category != null)
+                    WriteCategory(category, writer);
+
+            foreach (SyndicationPerson contributor in Feed.Contributors)
+            {
+                if (contributor != null)
+                {
+                    writer.WriteStartElement("contributor", AtomNamespace);
+                    WriteAttributeExtensions(writer, contributor, Version);
+                    writer.WriteElementString("name", AtomNamespace, contributor.Name);
+                    writer.WriteElementString("uri", AtomNamespace, contributor.Uri);
+                    writer.WriteElementString("email", AtomNamespace, contributor.Email);
+                    WriteElementExtensions(writer, contributor, Version);
+                    writer.WriteEndElement();
                 }
             }
 
-            // atom:feed elements MUST contain exactly one atom:title element.
-            (Feed.Title ?? new TextSyndicationContent (String.Empty)).WriteTo (writer, "title", AtomNamespace);
+            if (Feed.Generator != null)
+                writer.WriteElementString("generator", AtomNamespace, Feed.Generator);
 
-			// atom:feed elements MUST contain exactly one atom:id element.
-			writer.WriteElementString ("id", AtomNamespace, Feed.Id ?? new UniqueId ().ToString ());
+            // atom:feed elements MUST contain exactly one atom:id element.
+            writer.WriteElementString("id", AtomNamespace, Feed.Id ?? new UniqueId().ToString());
 
-			if (Feed.Copyright != null)
+            foreach (SyndicationLink link in Feed.Links)
+                if (link != null)
+                {
+                    writer.WriteStartElement("link");
+                    if (link.RelationshipType != null)
+                        writer.WriteAttributeString("rel", link.RelationshipType);
+                    if (link.MediaType != null)
+                        writer.WriteAttributeString("type", link.MediaType);
+                    if (link.Title != null)
+                        writer.WriteAttributeString("title", link.Title);
+                    if (link.Length != 0)
+                        writer.WriteAttributeString("length", link.Length.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteAttributeString("href", link.Uri != null ? link.Uri.ToString() : String.Empty);
+                    WriteAttributeExtensions(writer, link, Version);
+                    WriteElementExtensions(writer, link, Version);
+                    writer.WriteEndElement();
+                }
+
+            if (Feed.ImageUrl != null)
+                writer.WriteElementString("logo", AtomNamespace, Feed.ImageUrl.ToString());
+
+            if (Feed.Copyright != null)
 				Feed.Copyright.WriteTo (writer, "rights", AtomNamespace);
-
-			// atom:feed elements MUST contain exactly one atom:updated element.
-			writer.WriteStartElement ("updated", AtomNamespace);
-			// FIXME: use DateTimeOffset itself once it is implemented.
-			writer.WriteString (XmlConvert.ToString (Feed.LastUpdatedTime.UtcDateTime, XmlDateTimeSerializationMode.RoundtripKind));
-			writer.WriteEndElement ();
-
-			foreach (SyndicationCategory category in Feed.Categories)
-				if (category != null)
-					WriteCategory (category, writer);
-
-			foreach (SyndicationPerson author in Feed.Authors)
-				if (author != null) {
-					writer.WriteStartElement ("author", AtomNamespace);
-					WriteAttributeExtensions (writer, author, Version);
-					writer.WriteElementString ("name", AtomNamespace, author.Name);
-					writer.WriteElementString ("uri", AtomNamespace, author.Uri);
-					writer.WriteElementString ("email", AtomNamespace, author.Email);
-					WriteElementExtensions (writer, author, Version);
-					writer.WriteEndElement ();
-				}
-
-			foreach (SyndicationPerson contributor in Feed.Contributors) {
-				if (contributor != null) {
-					writer.WriteStartElement ("contributor", AtomNamespace);
-					WriteAttributeExtensions (writer, contributor, Version);
-					writer.WriteElementString ("name", AtomNamespace, contributor.Name);
-					writer.WriteElementString ("uri", AtomNamespace, contributor.Uri);
-					writer.WriteElementString ("email", AtomNamespace, contributor.Email);
-					WriteElementExtensions (writer, contributor, Version);
-					writer.WriteEndElement ();
-				}
-			}
-
-			foreach (SyndicationLink link in Feed.Links)
-				if (link != null) {
-					writer.WriteStartElement ("link");
-					if (link.RelationshipType != null)
-						writer.WriteAttributeString ("rel", link.RelationshipType);
-					if (link.MediaType != null)
-						writer.WriteAttributeString ("type", link.MediaType);
-					if (link.Title != null)
-						writer.WriteAttributeString ("title", link.Title);
-					if (link.Length != 0)
-						writer.WriteAttributeString ("length", link.Length.ToString (CultureInfo.InvariantCulture));
-					writer.WriteAttributeString ("href", link.Uri != null ? link.Uri.ToString () : String.Empty);
-					WriteAttributeExtensions (writer, link, Version);
-					WriteElementExtensions (writer, link, Version);
-					writer.WriteEndElement ();
-				}
 
 			if (Feed.Description != null)
 				Feed.Description.WriteTo (writer, "subtitle", AtomNamespace);
 
-			if (Feed.ImageUrl != null)
-				writer.WriteElementString ("logo", AtomNamespace, Feed.ImageUrl.ToString ());
+            // atom:feed elements MUST contain exactly one atom:title element.
+            (Feed.Title ?? new TextSyndicationContent(String.Empty)).WriteTo(writer, "title", AtomNamespace);
 
-			if (Feed.Generator != null)
-				writer.WriteElementString ("generator", AtomNamespace, Feed.Generator);
 
-			WriteItems (writer, Feed.Items, Feed.BaseUri);
+            // atom:feed elements MUST contain exactly one atom:updated element.
+            writer.WriteStartElement("updated", AtomNamespace);
+            // FIXME: use DateTimeOffset itself once it is implemented.
+            writer.WriteString(XmlConvert.ToString(Feed.LastUpdatedTime.UtcDateTime, XmlDateTimeSerializationMode.RoundtripKind));
+            writer.WriteEndElement();
 
-			WriteElementExtensions (writer, Feed, Version);
+            WriteElementExtensions(writer, Feed, Version);
+
+            WriteItems (writer, Feed.Items, Feed.BaseUri);
+			
 			if (writeRoot)
 				writer.WriteEndElement ();
 		}
