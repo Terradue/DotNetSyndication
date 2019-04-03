@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Terradue.ServiceModel.Syndication.Tests</RootNamespace>
     <AssemblyName>Terradue.ServiceModel.Syndication.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <ReleaseVersion></ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
