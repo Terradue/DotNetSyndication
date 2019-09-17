@@ -1,0 +1,7 @@
+{
+        "nxunitExplorer.modules": [
+                "**Tests/bin/**/**/*.{dll,exe}"
+        ],
+        "nxunitExplorer.xunit": "packages/xunit.runner.console/2.4.1/tools/net452/xunit.console.exe",
+        "dotnet-test-explorer.testProjectPath": "**/*Tests.csproj"
+}       
