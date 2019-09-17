@@ -101,6 +101,10 @@ namespace Terradue.ServiceModel.Syndication
 
 		protected internal virtual bool TryParseElement (XmlReader reader, string version)
 		{
+			if ( reader.NodeType == XmlNodeType.Text ){
+				extensions.Text = reader.ReadContentAsString();
+				return true;
+			}
 			return false;
 		}
 

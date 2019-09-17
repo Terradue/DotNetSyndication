@@ -5,9 +5,11 @@
 /DotNetSyndication.userprefs
 build
 
-/Terradue.ServiceModel.Syndication/obj/
+/Terradue.ServiceModel.Syndication/obj
 *.nupkg
 /Terradue.ServiceModel.Syndication.Tests/bin
 /.vs
 /packages
 /Terradue.ServiceModel.Syndication.Tests/out/search.atom
+
+Terradue.ServiceModel.Syndication.Tests/obj

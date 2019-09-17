@@ -41,6 +41,8 @@ namespace Terradue.ServiceModel.Syndication
 		Dictionary<XmlQualifiedName, string> attributes;
 		SyndicationElementExtensionCollection elements;
 
+		String text;
+
 		public Dictionary<XmlQualifiedName, string> Attributes {
 			get {
 				if (attributes == null)
@@ -60,11 +62,14 @@ namespace Terradue.ServiceModel.Syndication
             }
         }
 
-		public SyndicationExtensions Clone ()
+        public string Text { get => text; set => text = value; }
+
+        public SyndicationExtensions Clone ()
 		{
 			SyndicationExtensions ret = new SyndicationExtensions ();
 			ret.attributes = attributes == null ? null : new Dictionary<XmlQualifiedName, string> (attributes);
 			ret.elements = elements == null ? null : new SyndicationElementExtensionCollection (elements);
+			ret.text = string.IsNullOrEmpty(text) ? null : text;
 			return ret;
 		}
 
@@ -85,6 +90,14 @@ namespace Terradue.ServiceModel.Syndication
 			foreach (SyndicationElementExtension el in elements)
 				if (el != null)
 					el.WriteTo (writer);
+		}
+
+		internal void WriteText (XmlWriter writer, string version)
+		{
+			if (string.IsNullOrEmpty(text))
+				return;
+
+			writer.WriteString(text);
 		}
 	}
 }
