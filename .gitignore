@@ -1,10 +1,12 @@
 /Syndication/bin
 
 /Terradue.ServiceModel.Syndication/bin
-
+*/bin/
+*/obj/
+packages/
 /DotNetSyndication.userprefs
 build
-
+.directory
 /Terradue.ServiceModel.Syndication/obj
 *.nupkg
 /Terradue.ServiceModel.Syndication.Tests/bin
