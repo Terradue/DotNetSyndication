@@ -28,7 +28,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'mkdir -p Terradue.ServiceModel.Syndication.Tests/out'
-        sh "mono packages/xunit.runner.console/2.4.1/tools/net452/xunit.console.exe Terradue.ServiceModel.Syndication.Tests/bin/*/net4*/*.Tests.dll -nunit TestResult.xml"
+        sh "mono packages/xunit.runner.console/2.2.0/tools/xunit.console.exe Terradue.ServiceModel.Syndication.Tests/bin/*/net4*/*.Tests.dll -nunit TestResult.xml"
       }
     }
     stage('Publish') {
