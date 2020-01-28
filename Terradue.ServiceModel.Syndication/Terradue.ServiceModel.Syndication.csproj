@@ -17,6 +17,7 @@
     <RepositoryUrl>https://github.com/Terradue/DotNetSyndication</RepositoryUrl>
     <PackageTags>OGC;Terradue;Atom;RSS</PackageTags>
     <NoWarn>$(NoWarn);NU1605</NoWarn>
+    <PackageOutputPath>$(SolutionDir)\build</PackageOutputPath>
   </PropertyGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
     <Reference Include="System" />
